@@ -1,0 +1,23 @@
+{%extends "base.html"%}
+
+{%block content%}
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10" style="border: 1px solid rgba(0, 0, 0, 0.8); border-radius: 7px; margin-bottom: 18px;">
+        <div class="mt-2" >
+          <div class="card-body" style="background-color: rgb(168, 167, 167);          ">
+            <h2 class="text-center">Delete</h2>
+            <form action="" method="post">{% csrf_token %} 
+                <div class="text-center" style="margin-bottom: 18px;">
+                    <p>Are you sure you want to delete "{{article.title}}"?</p>
+                    <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+
+                </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

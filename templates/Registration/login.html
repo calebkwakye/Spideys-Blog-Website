@@ -1,0 +1,28 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags%}
+{% block title %} Log In {% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card" style="border: 1px rgba(0, 0, 0, 0.8);">
+        <div class="card-body" style="background-color: rgb(168, 167, 167); border: 1px solid rgba(0, 0, 0, 0.8);
+        border-radius: 7px;">
+          <h2 class="card-title" style="text-align: center; color: rgba(0, 0, 0, 0.8);font-family: Pacifico, cursive;font-weight: bold;">Uncover the Headlines</h2>
+          <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="text-center"> <!-- Add this wrapper div with "text-center" class -->
+              <button class="btn btn-success btn-block mt-3" type="submit">Log in</button>
+            </div>
+          </form>
+          <p class="mt-3 d-flex flex-column align-items-center">
+            <a href="{% url 'password_reset' %}" style="color: rgba(0, 0, 0, 0.8);">Forgot your password?</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+  {% if user.is_authenticated %}
+    <script>
+      // Redirect the user to the article page immediately if authenticated
+      window.location.href = "{% url 'article_list' %}";
+    </script>
+  {% else %}
+  <style>
+    /* Styles for the message container */
+    #homeMessageContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 20px;
+    }
+
+    /* Styles for the message text */
+    #homeMessage {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 800px;
+      font-weight: 400;
+      
+      opacity: 4; /* Set initial opacity to 0 to trigger the fade-in animation */
+    }
+
+    @keyframes fadeInAnimation {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <div id="homeMessageContainer">
+    <p id="homeMessage">
+      Hey there! Welcome to Spidey's Dispatch, your ultimate gateway to a world of boundless knowledge and inspiration! We are thrilled to invite you to join our vibrant community of enthusiastic readers, all connected by a common thread - the insatiable thirst for information.
+      At Spidey's Dispatch, we take pride in curating a diverse and immersive collection of captivating stories that will transport you to new realms, evoke emotions, and stimulate your intellect. From riveting tales of adventure and mystery to thought-provoking pieces on science, arts, and culture, our carefully curated content ensures there's something for every curious mind.
+      But that's not all! We go beyond the ordinary news and delve deep into the heart of our college community, celebrating remarkable achievements and spotlighting the incredible talents and initiatives of our students and faculty. You'll witness firsthand the transformative power of education and how it shapes the lives of individuals in extraordinary ways.
+      Our commitment to fostering an engaged community goes beyond just reading. We offer a platform for open discussions and constructive debates, where diverse perspectives converge, and ideas are exchanged freely. Here, you can interact with fellow readers, share your thoughts, and be part of the collective quest for knowledge and understanding.
+      By signing up with Spidey's Dispatch, you embark on a truly exciting journey of discovery, personal growth, and connection. Stay informed about the latest happenings on campus and beyond, and let us be your trusted companion in navigating the complexities of the world.
+      Get ready to experience news like never before, where every story is a web that weaves us together in this vast universe of information. Let us inspire your mind, broaden your horizons, and ignite your passion for learning.
+      So, what are you waiting for? The web of knowledge awaits you. Sign up now and embrace the adventure that is Spidey's Dispatch! Together, let's create a thriving community that celebrates knowledge, curiosity, and the pursuit of truth. Welcome aboard!
+    </p>    
+  </div>
+
+  <script>
+    // JavaScript code to show text line by line with typing animation
+    const homeMessage = document.getElementById("homeMessage");
+    const paragraphs = homeMessage.innerText.split("\n");
+    homeMessage.innerText = ""; // Clear the original text
+
+    function typeParagraph(index, line = 0) {
+      if (index >= paragraphs.length) {
+        homeMessage.style.opacity = "1"; // Fade-in after all lines are displayed
+        return;
+      }
+
+      const currentParagraph = paragraphs[index];
+      const currentLine = currentParagraph.slice(0, line);
+      homeMessage.innerText = paragraphs.slice(0, index).join("\n") + currentLine;
+
+      if (line < currentParagraph.length) {
+        requestAnimationFrame(() => typeParagraph(index, line + 1));
+      } else {
+        setTimeout(() => typeParagraph(index + 1), 8000); // Delay between each line (adjust as needed)
+      }
+    }
+
+    // Start the typing animation when the page loads
+    window.addEventListener("load", function () {
+      typeParagraph(0);
+    });
+  </script>
+
+  {% endif %}
+{% endblock content %}
